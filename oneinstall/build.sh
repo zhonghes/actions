@@ -220,13 +220,13 @@ function Main() {
     CreateCentos8Repo || return 1
     yum module disable mysql redis openrestry -y
 
-    mkdir -p /egova/unusualrepo
-    if CreateUnusualRepo /egova/unusualrepo package.ini; then
-        Info "特殊处理软件仓库创建成功"
-    else
-        Err "错误：${RETURN[*]} 特殊处理包仓库创建失败"
-        return 1
-    fi
+    # mkdir -p /egova/unusualrepo
+    # if CreateUnusualRepo /egova/unusualrepo package.ini; then
+    #     Info "特殊处理软件仓库创建成功"
+    # else
+    #     Err "错误：${RETURN[*]} 特殊处理包仓库创建失败"
+    #     return 1
+    # fi
 
     mkdir -p /egova/repotrack
     if RepotrackPackage /egova/repotrack package.ini; then
