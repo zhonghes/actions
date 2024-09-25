@@ -1,0 +1,14 @@
+on:
+  push:
+    paths:
+    - 'online_test/README.md'
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 拉取仓库
+      uses: actions/checkout@v4
+    
+    - name: 生成在线测试环境
+      uses: mxschmitt/action-tmate@v3

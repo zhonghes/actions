@@ -1,0 +1,42 @@
+on:
+  push:
+    paths:
+      - 'openssh/README.md'
+
+jobs:
+  build-openssh:
+    runs-on: ubuntu-latest
+    env: 
+      centos6_build_path: 'openssh/centos6'
+      centos7_build_path: 'openssh/centos7'
+      openEuler_22_04_LTS_build_path: 'openssh/openEuler_22.04_LTS'
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: 拉取当前仓库
+        uses: actions/checkout@v4
+
+      - name: centos_6_x86_64 编译
+        uses: ./.github/actions/build_openssh/centos6
+        with:
+          build_path: ${{ env.centos6_build_path}}
+
+      - name: centos_7_x86_64 编译
+        uses: ./.github/actions/build_openssh/centos7
+        with:
+          build_path: ${{ env.centos7_build_path}}
+
+      - name: openEuler_22.04_LTS_x86_64 编译
+        uses: ./.github/actions/build_openssh/openEuler_22.04_LTS
+        with:
+          build_path: ${{ env.openEuler_22_04_LTS_build_path }}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      
+      - name: openEuler_22.04_LTS_arm64 编译 
+        run: docker run --rm --platform=linux/arm64 -v .:/github/workspace openeuler/openeuler:22.03-lts bash /github/workspace/.github/actions/build_openssh/openEuler_22.04_LTS/entrypoint.sh "${{ env.openEuler_22_04_LTS_build_path }}"
+
+      - name: 上传编译文件至指定目录
+        uses: stefanzweifel/git-auto-commit-action@v5

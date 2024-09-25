@@ -1,0 +1,5 @@
+.git
+oneinstall/binary/*
+oneinstall/rpms/*
+oneinstall/srpms/*
+oneinstall/oneinstall.zip

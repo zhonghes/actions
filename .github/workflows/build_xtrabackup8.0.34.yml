@@ -1,0 +1,28 @@
+on:
+  push:
+    paths:
+      - 'xtrabackup8.0.34/README.md'
+
+jobs:
+  build-openssh:
+    runs-on: ubuntu-latest
+    env: 
+      dest_path: xtrabackup8.0.34
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: 拉取当前仓库
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: openEuler_22.04_LTS_amd64 编译 
+        run: docker run --rm --platform=linux/amd64 -v .:/github/workspace openeuler/openeuler:22.03-lts bash /github/workspace/xtrabackup8.0.34/build.sh "${{ env.dest_path }}"
+      
+      # - name: openEuler_22.04_LTS_arm64 编译 
+      #   run: docker run --rm --platform=linux/arm64 -v .:/github/workspace openeuler/openeuler:22.03-lts bash /github/workspace/xtrabackup8.0.34/build.sh "${{ env.dest_path }}"
+
+      - name: 上传编译文件至指定目录
+        uses: stefanzweifel/git-auto-commit-action@v5

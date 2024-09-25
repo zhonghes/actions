@@ -1,0 +1,13 @@
+name: '打包 openssh'
+
+inputs:
+  build_path:
+    required: true
+    default: openssh
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.build_path }}
+
