@@ -5,7 +5,7 @@ on:
     paths:
       - 'ddns/README.md'
   schedule:
-    - cron: '5 * * * *'  # 每小时自动同步
+    - cron: '5 * * * *'
 
 jobs:
   check:
@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: check ddns
         run: |
-          [[ $(timeout 3 curl -s xingdao.ddnsfree.com:11016/7f77d4ab8bca) == af6c7363c612 ]]
+          [[ $(timeout 3 curl -s xingdao.ddnsfree.com:11016/7f77d4ab8bca) != af6c7363c612 ]]
 
   update:
     needs: check
