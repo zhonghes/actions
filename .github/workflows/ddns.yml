@@ -1,6 +1,9 @@
 name: ddns
 
 on:
+  push:
+    paths:
+      - 'ddns/README.md'
   schedule:
     - cron: '0 * * * *'  # 每小时自动同步
 
