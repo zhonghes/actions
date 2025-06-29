@@ -24,12 +24,9 @@ jobs:
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan gitee.com >> ~/.ssh/known_hosts
 
-      - name: Clone from Gitee and get ipv4
+      - name: Update ddns
         run: |
           cd $(mktemp -d) && git clone ${{ secrets.GITEE_REPO_URL }} --depth=1
           cd ddns && ipv4=$(<ip.txt)
-
-      - name: Update ddns
-        run: |
           body='{"name":"xingdao.ddnsfree.com","ipv4Address":"'${ipv4}'"}'
-          curl -X POST "https://api.dynu.com/v2/dns/9237025" -H "accept: application/json" -H "API-Key: 454c4W53XVdV46fUdaTT6U6U5Z6b546g" -H "Content-Type: application/json" -d "${body}"
+          curl -s -X POST "https://api.dynu.com/v2/dns/9237025" -H "accept: application/json" -H "API-Key: 454c4W53XVdV46fUdaTT6U6U5Z6b546g" -H "Content-Type: application/json" -d "${body}"
