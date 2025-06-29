@@ -16,7 +16,7 @@ jobs:
       - name: check ddns
         id: check_ddns
         run: |
-          if [[ $(timeout 3 curl -s xingdao.ddnsfree.com:11016/7f77d4ab8bca) != af6c7363c612 ]]; then
+          if [[ $(timeout 3 curl -s xingdao.ddnsfree.com:11016/7f77d4ab8bca) == af6c7363c612 ]]; then
             echo "check=sucess" >> "$GITHUB_OUTPUT"
           else
             echo "check=failed" >> "$GITHUB_OUTPUT"
