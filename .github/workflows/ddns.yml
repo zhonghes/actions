@@ -24,12 +24,9 @@ jobs:
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan gitee.com >> ~/.ssh/known_hosts
 
-      - name: Clone from Gitee
+      - name: Clone from Gitee and get ipv4
         run: |
           cd $(mktemp -d) && git clone ${{ secrets.GITEE_REPO_URL }} --depth=1
-
-      - name: Get ipv4
-        run: |
           cd ddns && ipv4=$(<ip.txt)
 
       - name: Update ddns
