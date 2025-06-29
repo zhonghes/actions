@@ -26,8 +26,7 @@ jobs:
 
       - name: Update ddns
         run: |
-          set +x
           cd $(mktemp -d) && git clone ${{ secrets.GITEE_REPO_URL }} --depth=1
-          cd ddns && ipv4=$(<ip.txt)
+          cd ddns && ipv4=$(<ip.txt) && echo "${ipv4}"
           body='{"name":"xingdao.ddnsfree.com","ipv4Address":"'${ipv4}'"}'
-          curl -s -X POST "https://api.dynu.com/v2/dns/9237025" -H "accept: application/json" -H "API-Key: 454c4W53XVdV46fUdaTT6U6U5Z6b546g" -H "Content-Type: application/json" -d "${body}"
+          curl -s -X POST "https://api.dynu.com/v2/dns/9237025" -H "accept: application/json" -H "API-Key: ${{ secrets.DYNU_KEY }}" -H "Content-Type: application/json" -d "${body}"
