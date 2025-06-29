@@ -5,18 +5,20 @@ on:
     paths:
       - 'ddns/README.md'
   schedule:
-    - cron: '0 * * * *'  # 每小时自动同步
+    - cron: '5 * * * *'  # 每小时自动同步
 
 jobs:
-  ddns:
+  check:
     runs-on: ubuntu-latest
     steps:
       - name: check ddns
         run: |
-          set +e
-          [[ $(timeout 3 curl -s xingdao.ddnsfree.com:11016/7f77d4ab8bca) == af6c7363c612 ]] && exit 0
-          set -e
+          [[ $(timeout 3 curl -s xingdao.ddnsfree.com:11016/7f77d4ab8bca) == af6c7363c612 ]]
 
+  update:
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
       - name: Set up SSH for Gitee
         run: |
           mkdir -p ~/.ssh
