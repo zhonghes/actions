@@ -44,7 +44,9 @@ jobs:
           cd $(mktemp -d) && git clone ${{ secrets.GITEE_REPO_URL }} --depth=1
           cd ddns && ipv4=$(<ipv4.txt) && echo "${ipv4}"
 
-          alias curl_dynu='curl -s -H "accept: application/json" -H "API-Key: ${{ secrets.DYNU_KEY }}"'
+          curl_dynu() {
+            curl -s -H "accept: application/json" -H "API-Key: ${{ secrets.DYNU_KEY }}" "$@"
+          }
 
           dns_id=$(curl_dynu -X GET "https://api.dynu.com/v2/dns/getroot/${{ env.hostname }}" | jq .id)
           curl_dynu -X POST "https://api.dynu.com/v2/dns/${dns_id}"  -d "{\"name\": \"${{ env.hostname }}\", \"ipv4Address\": \"${ipv4}\"}"
