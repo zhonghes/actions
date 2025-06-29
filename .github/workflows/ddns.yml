@@ -1,0 +1,37 @@
+name: ddns
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # 每小时自动同步
+
+jobs:
+  ddns:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check ddns
+        run: |
+          [[ $(timout 3 curl -s xingdao.ddnsfree.com:11016/7f77d4ab8bca) == af6c7363c612 ]] && exit 0
+
+      - name: Checkout GitHub repo
+        uses: actions/checkout@v4
+
+      - name: Set up SSH for Gitee
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.GITEE_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan gitee.com >> ~/.ssh/known_hosts
+
+      - name: Pull from Gitee
+        run: |
+          git remote add gitee ${{ secrets.GITEE_REPO_URL }}
+          git pull gitee main --depth=1
+
+      - name: Get ipv4
+        run: |
+          (cd ddns && ipv4=$(<ip.txt))
+
+      - name: Update ddns
+        run: |
+          body='{"name":"xingdao.ddnsfree.com","ipv4Address":"'${ipv4}'"}'
+          curl -X POST "https://api.dynu.com/v2/dns/9237025" -H "accept: application/json" -H "API-Key: 454c4W53XVdV46fUdaTT6U6U5Z6b546g" -H "Content-Type: application/json" -d "${body}"
