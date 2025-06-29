@@ -27,10 +27,9 @@ jobs:
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan gitee.com >> ~/.ssh/known_hosts
 
-      - name: Pull from Gitee
+      - name: Clone from Gitee
         run: |
-          git remote add gitee ${{ secrets.GITEE_REPO_URL }}
-          git pull gitee main --depth=1
+          git clone ${{ secrets.GITEE_REPO_URL }} --depth=1
 
       - name: Get ipv4
         run: |
