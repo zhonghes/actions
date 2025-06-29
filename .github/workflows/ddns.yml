@@ -24,7 +24,7 @@ jobs:
 
   update:
     needs: check
-    if: ${{needs.check.outputs.output == "failed"}}
+    if: ${{needs.check.outputs.output == 'failed'}}
     runs-on: ubuntu-latest
     steps:
       - name: Set up SSH for Gitee
