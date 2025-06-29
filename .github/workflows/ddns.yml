@@ -13,7 +13,9 @@ jobs:
     steps:
       - name: check ddns
         run: |
-          { keyword=$(timeout 3 curl -s xingdao.ddnsfree.com:11016/7f77d4ab8bca) || echo "获取关键字超时"; } && { [[ ${key} == af6c7363c612 ]] && exit 0; }
+          set +e
+          [[ $(timeout 3 curl -s xingdao.ddnsfree.com:11016/7f77d4ab8bca) == af6c7363c612 ]] && exit 0
+          set -e
 
       - name: Checkout GitHub repo
         uses: actions/checkout@v4
