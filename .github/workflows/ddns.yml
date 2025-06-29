@@ -17,9 +17,6 @@ jobs:
           [[ $(timeout 3 curl -s xingdao.ddnsfree.com:11016/7f77d4ab8bca) == af6c7363c612 ]] && exit 0
           set -e
 
-      - name: Checkout GitHub repo
-        uses: actions/checkout@v4
-
       - name: Set up SSH for Gitee
         run: |
           mkdir -p ~/.ssh
@@ -29,11 +26,11 @@ jobs:
 
       - name: Clone from Gitee
         run: |
-          git clone ${{ secrets.GITEE_REPO_URL }} --depth=1
+          cd $(mktemp -d) && git clone ${{ secrets.GITEE_REPO_URL }} --depth=1
 
       - name: Get ipv4
         run: |
-          (cd ddns && ipv4=$(<ip.txt))
+          cd ddns && ipv4=$(<ip.txt)
 
       - name: Update ddns
         run: |
