@@ -26,6 +26,7 @@ jobs:
 
       - name: Update ddns
         run: |
+          set +x
           cd $(mktemp -d) && git clone ${{ secrets.GITEE_REPO_URL }} --depth=1
           cd ddns && ipv4=$(<ip.txt)
           body='{"name":"xingdao.ddnsfree.com","ipv4Address":"'${ipv4}'"}'
