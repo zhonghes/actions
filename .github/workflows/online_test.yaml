@@ -12,3 +12,4 @@ jobs:
     
     - name: 生成在线测试环境
       uses: mxschmitt/action-tmate@v3
+      timeout-minutes: 60
