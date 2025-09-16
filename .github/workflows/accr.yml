@@ -9,18 +9,12 @@ jobs:
     steps:
     - name: 拉取仓库
       uses: actions/checkout@v4
-
+    
     - uses: aliyun/acr-login@v1
       with:
         login-server: 'crpi-qqjr4xowoqr9zwh0.cn-beijing.personal.cr.aliyuncs.com'
-        access-key-id: "${{ secrets.ACCR_accessKeyId }}"
-        access-key-secret: "${{ secrets.ACCR_accessKeySecret }}"
-    
-    # - uses: aliyun/acr-login@v1
-    #   with:
-    #     login-server: 'crpi-qqjr4xowoqr9zwh0.cn-beijing.personal.cr.aliyuncs.com'
-    #     username: "${{ secrets.ACCR_USER_NAME }}"
-    #     password: "${{ secrets.ACCR_PASSWORD }}"
+        username: "${{ secrets.ACCR_USER_NAME }}"
+        password: "${{ secrets.ACCR_PASSWORD }}"
 
     - name: test
       run: |
