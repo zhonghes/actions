@@ -2,6 +2,7 @@ on:
   push:
     paths:
     - 'accr/README.md'
+    - 'accr/push_images.sh'
   
 jobs:
   build:
