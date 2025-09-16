@@ -3,6 +3,8 @@ on:
     paths:
     - 'accr/README.md'
     - 'accr/push_images.sh'
+  schedule:
+    - cron: '50 23 * * *'
   
 jobs:
   build:
