@@ -3,6 +3,7 @@
 LIST_IMAGES=(
     "redis:6"
     "redis:7"
+    "outlinewiki/outline:latest"
 )
 
 function Main() {
