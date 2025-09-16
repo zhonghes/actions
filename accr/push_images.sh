@@ -5,9 +5,13 @@
 # 格式二：
 #   镜像
 LIST_IMAGES=(
-    "redis:6"
+    "linux/amd64,redis:6,x86_64"
+    "linux/amd64,redis:7,x86_64"
+    "linux/amd64,redis:8,x86_64"
     "linux/arm64/v8,redis:6,aarch64"
-    "redis:7"
+    "linux/arm64/v8,redis:7,aarch64"
+    "linux/arm64/v8,redis:8,aarch64"
+    
     "outlinewiki/outline:latest"
 )
 
