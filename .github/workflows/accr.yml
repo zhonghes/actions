@@ -13,8 +13,8 @@ jobs:
     - uses: aliyun/acr-login@v1
       with:
         login-server: 'crpi-qqjr4xowoqr9zwh0.cn-beijing.personal.cr.aliyuncs.com'
-        access-key-id: "${{ secrets.ACCR_USER_NAME }}"
-        access-key-secret: "${{ secrets.ACCR_PASSWORD }}"
+        access-key-id: "${{ secrets.ACCR_accessKeyId }}"
+        access-key-secret: "${{ secrets.accessKeySecret }}"
     
     - uses: aliyun/acr-login@v1
       with:
