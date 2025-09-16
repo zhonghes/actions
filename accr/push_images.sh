@@ -1,12 +1,13 @@
 #/usr/bin/env bash
 
-function Main() {
-  local _list_image _platform _tag _new_tag
-  _list_image=(
+LIST_IMAGES=(
     "redis:7"
   )
 
-  for image in "${_list_image[@]}": do
+function Main() {
+  local _tag _new_tag
+
+  for image in "${LIST_IMAGES[@]}": do
     # _platform="${image%,*}"
     _tag="${image#*,}"
     _new_tag="crpi-qqjr4xowoqr9zwh0.cn-beijing.personal.cr.aliyuncs.com/zhonghes/${_tag}"
