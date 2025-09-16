@@ -13,8 +13,8 @@ jobs:
     - uses: aliyun/acr-login@v1
       with:
         region-id: 'cn-beijing'
-        access-key-id: '${{ secrets.ACCR_ACCESSKEYID }}'
-        access-key-secret: '${{ secrets.ACCR_ACCESSKEYSECRET }}'
+        access-key-id: "${{ secrets.ACCR_ACCESSKEYID }}"
+        access-key-secret: "${{ secrets.ACCR_ACCESSKEYSECRET }}"
 
     - name: test
       run: |
