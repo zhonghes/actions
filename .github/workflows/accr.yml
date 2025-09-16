@@ -12,9 +12,9 @@ jobs:
     
     - uses: aliyun/acr-login@v1
       with:
-        region-id: 'crpi-qqjr4xowoqr9zwh0.cn-beijing.personal.cr.aliyuncs.com'
-        access-key-id: "${{ secrets.ACCR_ACCESSKEYID }}"
-        access-key-secret: "${{ secrets.ACCR_ACCESSKEYSECRET }}"
+        login-server: 'crpi-qqjr4xowoqr9zwh0.cn-beijing.personal.cr.aliyuncs.com'
+        username: "${{ secrets.ACCR_USER_NAME }}"
+        password: "${{ secrets.ACCR_PASSWORD }}"
 
     - name: test
       run: |
