@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 LIST_IMAGES=(
+    "redis:6"
     "redis:7"
 )
 
