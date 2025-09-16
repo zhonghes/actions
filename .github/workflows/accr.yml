@@ -17,7 +17,7 @@ jobs:
         username: "${{ secrets.ACCR_USER_NAME }}"
         password: "${{ secrets.ACCR_PASSWORD }}"
 
-    - name: logout
+    - name: push images
       run: bash accr/push_images.sh
 
     - name: logout
